@@ -152,21 +152,3 @@ class WoDataBase(object):
 			
 			return cursor.fetchall()[0]
 			
-if __name__ == "__main__":
-        """for debug only"""
-	workouts = WoDataBase()
-	
-	for i in range(2008,2014):
-		workouts.add(str(i)+"-04-10", "heyg", 8, 6, 15, "nooneone")
-
-	print workouts.retrieve_all()
-	print
-	print workouts.retrieve_by_date("2010-02-03")
-	print
-	print workouts.retrieve_excercises()
-	print
-	print workouts.retrieve_by_interval("2012-12-10", "2015-02-02")
-	print
-	print workouts.retrieve_by_excercise("trie")
-	print
-	print workouts.retrieve_last_workout_by_excercise("ala")

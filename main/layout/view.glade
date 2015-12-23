@@ -266,7 +266,7 @@
             <property name="year">2015</property>
             <property name="month">11</property>
             <property name="day">20</property>
-            <signal name="day-selected" handler="on_calendarFrom_day_selected" swapped="no"/>
+            <signal name="day-selected" handler="on_calendar_day_selected" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -281,7 +281,7 @@
             <property name="year">2015</property>
             <property name="month">11</property>
             <property name="day">20</property>
-            <signal name="day-selected" handler="on_calendarTo_day_selected" swapped="no"/>
+            <signal name="day-selected" handler="on_calendar_day_selected" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>

@@ -49,23 +49,7 @@ class GtkUtils(object):
 				if int(dateA[8:11])>int(dateB[8:11]):
 					return True
 		
-		return False
-		
-	def update_between_dates(self,dateFrom,dateTo,store):
-		"""Updates the store, showing items from woDataBase
-		between the two dates"""
-		
-		if dateFrom==dateTo:
-			self.update_store(
-				store,
-				woDataBase.retrieve_by_date(dateFrom))
-		else:
-			self.update_store(
-				store,
-				woDataBase.retrieve_by_interval(dateFrom,dateTo))
-
-		message="Showing excercises from:  "+dateFrom+"  To:  "+dateTo
-		window.statusBar.push(0,message)
+		return False	
 
 class FrameView(Gtk.Frame):
 	
@@ -84,15 +68,13 @@ class FrameView(Gtk.Frame):
 		self.listExcercises=builder.get_object("listExcercises")
 		self.calendarFrom=builder.get_object("calendarFrom")
 		self.calendarTo=builder.get_object("calendarTo")
-		
-		gtkUtils.update_store(
-			self.listExcercises,
-			[[exc] for exc in woDataBase.retrieve_excercises()])
-			
+
+		allEntries=[[exc] for exc in woDataBase.retrieve_excercises()]
+		gtkUtils.update_store(self.listExcercises,allEntries)
 		gtkUtils.update_store(self.listStore,woDataBase.retrieve_all())
 
 	def on_buttonShowAll_clicked(self,button):
-		"""show all excercises on screen"""
+		"""show all entries on screen"""
 		self.listStore.clear()
 		gtkUtils.update_store(self.listStore,woDataBase.retrieve_all())		
 		window.statusBar.push(0,"Showing ALL entries")
@@ -127,24 +109,26 @@ class FrameView(Gtk.Frame):
 		window.statusBar.push(0,"Showing Excercises for: "+selected)
 	
 		
-	def on_calendarFrom_day_selected(self,calendar):
+	def on_calendar_day_selected(self,calendar):
+                """updates the tree's store to display entries between the two dates"""
 		dateFrom=gtkUtils.date_to_string(self.calendarFrom.get_date())
 		dateTo=gtkUtils.date_to_string(self.calendarTo.get_date())
+		
 		if gtkUtils.is_later(dateFrom,dateTo):
 			self.calendarTo.select_month(int(dateFrom[5:7])-1,int(dateFrom[0:4]))
 			self.calendarTo.select_day(int(dateFrom[8:11]))
 		
-		gtkUtils.update_between_dates(dateFrom,dateTo,self.listStore)
-				
-	def on_calendarTo_day_selected(self,calendar):
-		dateFrom=gtkUtils.date_to_string(self.calendarFrom.get_date())
-		dateTo=gtkUtils.date_to_string(self.calendarTo.get_date())
-		if gtkUtils.is_later(dateFrom,dateTo):
-			self.calendarTo.select_month(int(dateFrom[5:7])-1,int(dateFrom[0:4]))
-			self.calendarTo.select_day(int(dateFrom[8:11]))
-		
-		gtkUtils.update_between_dates(dateFrom,dateTo,self.listStore)
-		
+		if dateFrom==dateTo:
+			gtkUtils.update_store(
+				self.listStore,
+				woDataBase.retrieve_by_date(dateFrom))
+		else:
+			gtkUtils.update_store(
+				self.listStore,
+				woDataBase.retrieve_by_interval(dateFrom,dateTo))
+
+		message="Showing excercises from:  "+dateFrom+"  To:  "+dateTo
+		window.statusBar.push(0,message)		
 class FrameAdd(Gtk.Frame):
 	
 	def __init__(self):
@@ -172,9 +156,11 @@ class FrameAdd(Gtk.Frame):
 			[[exc] for exc in woDataBase.retrieve_excercises()])
 			
 	def on_comboBoxExcerciseAdd_changed(self,combo):
+                """loads the last known configuartion from selected excercise"""
 		path=combo.get_child().get_displayed_row()
 		if not path: return
 		iter_=self.listExcercisesAdd.get_iter(path)
+		if not iter_: return
 		selected=self.listExcercisesAdd.get_value(iter_,0)
 		last=woDataBase.retrieve_last_workout_by_excercise(selected)
 		
@@ -182,12 +168,11 @@ class FrameAdd(Gtk.Frame):
 		self.spinbuttonSets.set_value(last[3])
 		self.spinbuttonReps.set_value(last[4])
 		self.spinbuttonWeight.set_value(last[5])
-		self.calendar.select_month(int(last[1][5:7])-1,int(last[1][0:4]))
-		self.calendar.select_day(int(last[1][8:11]))
 		
 		window.statusBar.push(0,"Showing last entry for given excercise")
 		
 	def on_buttonAdd_clicked(self,button):
+                """adds the entry into the database"""
 		excercise=self.entryExcercise.get_text()
 		
 		if not excercise:
