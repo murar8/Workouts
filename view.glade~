@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
+<interface>
+  <requires lib="gtk+" version="3.10"/>
+  <object class="GtkListStore" id="listExcercises">
+    <columns>
+      <!-- column-name NAME -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="wadaw">awdawdawda</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="listStore">
+    <columns>
+      <!-- column-name ID -->
+      <column type="gint"/>
+      <!-- column-name DATE -->
+      <column type="gchararray"/>
+      <!-- column-name EXCERCISE -->
+      <column type="gchararray"/>
+      <!-- column-name SETS -->
+      <column type="gint"/>
+      <!-- column-name REPS -->
+      <column type="gint"/>
+      <!-- column-name WEIGHT -->
+      <column type="gint"/>
+      <!-- column-name NOTES -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkBox" id="box">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkScrolledWindow" id="scrolledWindow">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="shadow_type">in</property>
+        <child>
+          <object class="GtkTreeView" id="treeViewWorkout">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="model">listStore</property>
+            <property name="headers_clickable">False</property>
+            <property name="rubber_banding">True</property>
+            <property name="enable_grid_lines">both</property>
+            <child internal-child="selection">
+              <object class="GtkTreeSelection" id="treeviewSelection">
+                <property name="mode">multiple</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnID">
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">ID</property>
+                <child>
+                  <object class="GtkCellRendererSpin" id="cellrendererspinID"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnDATE">
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">DATE</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertextDATE"/>
+                  <attributes>
+                    <attribute name="text">1</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnEXCERCISE">
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">EXCERCISE</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertextEXCERCISE"/>
+                  <attributes>
+                    <attribute name="text">2</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnSETS">
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">SETS</property>
+                <child>
+                  <object class="GtkCellRendererSpin" id="cellrendererspinSETS"/>
+                  <attributes>
+                    <attribute name="text">3</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnREPS">
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">REPS</property>
+                <child>
+                  <object class="GtkCellRendererSpin" id="cellrendererspinREPS"/>
+                  <attributes>
+                    <attribute name="text">4</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnWEIGHT">
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">WEIGHT</property>
+                <child>
+                  <object class="GtkCellRendererAccel" id="cellrendererspinWEIGHT"/>
+                  <attributes>
+                    <attribute name="text">5</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumnNOTES">
+                <property name="spacing">4</property>
+                <property name="sizing">autosize</property>
+                <property name="title" translatable="yes">NOTES</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertextNOTES"/>
+                  <attributes>
+                    <attribute name="text">6</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="buttonShowAll">
+        <property name="label" translatable="yes">Show All</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <signal name="clicked" handler="on_buttonShowAll_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="buttonDelete">
+        <property name="label" translatable="yes">Delete Selected</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <signal name="clicked" handler="on_buttonDelete_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="boxFilterExcercise">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkLabel" id="labelFilter">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">select Excercise: </property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="comboBoxExcercise">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <signal name="changed" handler="on_comboBoxExcercise_changed" swapped="no"/>
+            <child>
+              <object class="GtkCellRendererText" id="cellrenderertextEXCCOMBO"/>
+              <attributes>
+                <attribute name="text">0</attribute>
+              </attributes>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="boxCalendarLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkLabel" id="labelFrom">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">FROM</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="labelTo">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">TO</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="boxCalendar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkCalendar" id="calendarFrom">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="year">2015</property>
+            <property name="month">11</property>
+            <property name="day">20</property>
+            <signal name="day-selected" handler="on_calendarFrom_day_selected" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCalendar" id="calendarTo">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="year">2015</property>
+            <property name="month">11</property>
+            <property name="day">20</property>
+            <signal name="day-selected" handler="on_calendarTo_day_selected" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">5</property>
+      </packing>
+    </child>
+  </object>
+</interface>
