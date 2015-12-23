@@ -15,7 +15,14 @@ class WoDataBase(object):
 	def __init__(self):
 		self.baseConnection=sqlite3.connect("main/database/workouts.db")
 		self.baseConnection.text_factory=str
-		
+		with self.baseConnection as connection:
+
+			cursor = connection.cursor()
+
+			cursor.execute("CREATE TABLE IF NOT EXISTS Workouts(\
+					Id INTEGER PRIMARY KEY AUTOINCREMENT,\
+					Date TEXT,Excercise TEXT,Sets INTEGER,\
+					Reps INTEGER,Weight INTEGER,Notes TEXT);")
 		
 	def __date_interval(self, dateInit, dateFinal):
 
@@ -50,11 +57,6 @@ class WoDataBase(object):
 		with self.baseConnection as connection:
 
 			cursor = connection.cursor()
-
-			cursor.execute("CREATE TABLE IF NOT EXISTS Workouts(\
-					Id INTEGER PRIMARY KEY AUTOINCREMENT,\
-					Date TEXT,Excercise TEXT,Sets INTEGER,\
-					Reps INTEGER,Weight INTEGER,Notes TEXT);")
 
 			cursor.execute("INSERT INTO Workouts\
 					(id,date,excercise,sets,reps,weight,notes)\
